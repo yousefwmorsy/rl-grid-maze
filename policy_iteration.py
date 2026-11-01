@@ -16,19 +16,6 @@ class PolicyIteration:
         """Print a grid of policy actions and corresponding state values."""
         policy = np.asarray(policy)
         value_function = np.asarray(value_function, dtype=float)
-        expected_states = grid_size * grid_size
-
-        if policy.shape != (expected_states,):
-            raise ValueError(f"policy must have shape ({expected_states},).")
-        if value_function.shape != (expected_states,):
-            raise ValueError(
-                f"value_function must have shape ({expected_states},)."
-            )
-
-        unknown_actions = set(policy.tolist()) - set(PolicyIteration.ACTION_SYMBOLS)
-        if unknown_actions:
-            raise ValueError(f"policy contains unsupported actions: {unknown_actions}")
-
         policy_grid = policy.reshape(grid_size, grid_size)
         value_grid = value_function.reshape(grid_size, grid_size)
         cell_width = max(
